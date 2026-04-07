@@ -4,16 +4,9 @@ In this repository, suppose we are the robotic engineer try to design a robot an
 
 We utilize MuJoCo as our simulation environment, and select the HalfCheetah-v5 task as our primary testbed, as it provides a relatively simple yet representative control problem. Then we integrate multiple sources of information—such as physical state data, visual inputs, and human commands—into the system, enabling the robot to perceive and respond to its environment.
 
-### About this "Ver.0.9" branch:
+## About this "Ver.0.9" branch:
 
 This is demo version, only contain simplified text input with strict reward options, raw CNN ingestion, and simple features concatenate.
-
-The following features will be add in new version(branch):
-- Introduce Vision Transformer (ViT) layers after the CNN module to capture global image structure.
-- Apply transformer-based encoders after feature fusion for better global representation learning.
-- Replace simple instruction input with LLM to understand more general text inputs.
-- Redesign reward function to be more flexible and continuous. (For example, an LLM could map instructions into a latent representation encoding both direction and magnitude (e.g., velocity scaling from -1 to 1), which can then be used to parameterize the reward.)
-- 
 
 ## Features in this project
 
@@ -23,16 +16,28 @@ Featuring as HalfCheetah-V.5:
   - Part of (8 of 17, which contain positions & angles) numerical state data inputs.
   - Deep-CNN image input.
   - Simple text ingestion which demostrate human commands that instruction reward functions.
-- 
 
-Note: This project requires access to IBM watsonx.ai.
- If you do not have credentials, 
- please refer to the code structure and architecture sections for implementation details.
+Note that due to the excessive time of the simulation, we also utilized google drive checkpoints to "segmenting", or preventing unintentional abrupt in our learning process.
+
+### The following features will be add in new version(branch):
+- Introduce Vision Transformer (ViT) layers after the CNN module to capture global image structure.
+- Apply transformer-based encoders after feature fusion for better global representation learning.
+- Replace simple instruction input with LLM to understand more general text inputs.
+- Redesign reward function to be more flexible and continuous. (For example, an LLM could map instructions into a latent representation encoding both direction and magnitude (e.g., velocity scaling from -1 to 1), which can then be used to parameterize the reward.)
+
+### Potential improvements:
+
+- Improve parallelization, for example by moving CNN computations to CUDA while avoiding bottlenecks from rendering, or by replacing the rendering pipeline with a more parallelizable alternative.
+- Explore the use of vision-language models (VLMs) to jointly process image and text inputs, potentially reducing the need for training CNN modules from scratch and improving efficiency.
+- Apply additional reinforcement learning algorithms beyond PPO algorithm.
+- Extend our gym from HalfCheetah to other environments to see how our current model was learned or can learn.
+- Note that when using DummyVecEnv, the CNN processes only single frames and cannot capture temporal dependencies. So in the future we might have to utilize the "VecFrameStack" to let CNN framework learn more properly.
+
 
 
 ## Contents of code
 
-qabot\
+VLA\
 ├── doc_load_embbed.py      # documents loading func. + embbeding func.\
 &emsp;&emsp;└── document_loader     # PDF / CSV / TXT / json loader
 
