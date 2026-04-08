@@ -118,4 +118,5 @@ python3 Train&Rollout.py
 python Rendering.py
 ```
 The expected result is shown in the vedio below. 
-![demo](Adobe Express - VLAback.gif)
+
+![demo](Adobe_Express_VLAback.gif)
