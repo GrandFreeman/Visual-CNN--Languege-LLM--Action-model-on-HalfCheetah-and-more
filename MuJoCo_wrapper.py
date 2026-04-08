@@ -11,6 +11,10 @@ import torch.nn as nn
 import numpy as np
 import gymnasium as gym
 
+from Text_tokenizer import tokenize
+from Text_tokenizer import VOCAB, TASKS, MAX_TEXT_LEN, IMAGE_SIZE
+
+
 class InstructionalHalfCheetah(gym.Env):
     """
     Dict observation:
