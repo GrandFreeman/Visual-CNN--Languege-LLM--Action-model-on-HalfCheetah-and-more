@@ -1,8 +1,8 @@
-from google.colab import drive
+#from google.colab import drive
 import os
 
 # Mount Google Drive
-drive.mount('/content/drive')
+#drive.mount('/content/drive')
 
 # Define a base directory for checkpoints and logs on Drive
 COLAB_CHECKPOINT_BASE_DIR = '/content/drive/MyDrive/colab_checkpoints/'
