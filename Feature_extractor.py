@@ -3,6 +3,19 @@
 #    CNN(image) + Embedding(text)
 # ---------------------------
 
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Dict, Tuple, Optional, List
+
+from gymnasium import spaces
+
+import torch as th
+import torch.nn as nn
+
+from stable_baselines3.common.torch_layers import BaseFeaturesExtractor
+
+
 class ImageTextExtractor(BaseFeaturesExtractor):
     def __init__(self, observation_space: spaces.Dict, features_dim: int = 256, vocab_size: int = len(VOCAB)):
         super().__init__(observation_space, features_dim)
