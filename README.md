@@ -17,7 +17,7 @@ Featuring as HalfCheetah-V.5:
   - Deep-CNN image input.
   - Simple text ingestion which demostrate human commands that instruction reward functions.
 
-Note that due to the excessive time of the simulation, we also utilized google drive checkpoints to "segmenting", or preventing unintentional abrupt in our learning process.
+Note that due to the excessive time of the simulation, we utilized Google drive checkpoints to preventing unintentional abrupt in our learning process. This saving method can be replace with others depending on which serve you best.
 
 ### The following features will be add in new version(branch):
 - Introduce Vision Transformer (ViT) layers after the CNN module to capture global image structure.
@@ -66,20 +66,27 @@ VLA\
 
 ## How to operate
 
-- First, you might need to create a virtual environment to operate it.
+### Mount Drive
+- First, you might need to mount the model on the Google drive.
 
-### Setting up a virtual environment
+Note that since we want to leveraging the checkpoints saving from the Google drive, we will need to operate following code in Google Colab notebook environment very quick, then we can on our way to model preparation via python files downloading and operating in terminal.
 
 ```bash
-python3.11 -m venv my_env
-source my_env/bin/activate
+from google.colab import drive
+drive.mount('/content/drive')
 
 ```
-You should see "(my_env)" before your machine as the env had set up successfully.
+
+### Setting up a environment
+
 
 - Second, you'll need to install necessary packages.
 ```bash
-pip install -r requirements.txt
+pip install mujoco stable_baselines3 mediapy
+apt-get update
+apt-get install -y libosmesa6-dev ffmpeg
+
+export MUJOCO_GL=osmesa
 ```
 
 - Third, after libs installed, you can now compile and excute the code.
