@@ -77,11 +77,18 @@ drive.mount('/content/drive')
 
 ```
 
+After the drive is mounted with Colab notebook, we now can execute following command to assigning checkpoints' file location in our Google drive.
+```bash
+python3 Google_drive.py
+```
+
 ### Setting up a environment
 
+- Second, you'll need to install necessary packages. You can either use bash command as Section 1, or download "Env_setup.py" to setup environment with Section 2 command, or even just copy "Env_setup_colab" code to Colab notebook.
 
-- Second, you'll need to install necessary packages.
+#### Section 1
 ```bash
+
 pip install mujoco stable_baselines3 mediapy
 apt-get update
 apt-get install -y libosmesa6-dev ffmpeg
@@ -89,16 +96,26 @@ apt-get install -y libosmesa6-dev ffmpeg
 export MUJOCO_GL=osmesa
 ```
 
-- Third, after libs installed, you can now compile and excute the code.
-
+#### Section 2
 ```bash
-python3.11 qabot.py
+python3 Env_setup.py
 ```
 
-- Finally, through the following http site at your local terminal, you now can access the Langchain-Chatbot-with-document-loading, and ask it any question that you see fit.
+
+### Start the training
+- Third, after our environment is installed, we can now excute "Train&Rollout.py" to start training and proceed several rollout prediction.
+
+The input image resolution of CNN is declared in "Text_tokenizer.py", and the max training steps and PPO cariables are with "Train&Rollout.py".
 
 ```bash
-http://---.-.-.-:7860
+python3 Train&Rollout.py
 ```
-The expected format is shown in the figure below. 
-![image](chat_demo.jpg)
+
+### Render the Mujoco video
+- Finally, after we complete the training and rollout, we can render the vedio of model's learning to see how our cheetah will move.
+
+```bash
+python Rendering.py
+```
+The expected result is shown in the vedio below. 
+![video](.mp4)
