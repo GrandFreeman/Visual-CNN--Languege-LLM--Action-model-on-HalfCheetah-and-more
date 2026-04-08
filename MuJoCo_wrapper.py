@@ -14,6 +14,7 @@ import gymnasium as gym
 from Text_tokenizer import tokenize
 from Text_tokenizer import VOCAB, TASKS, MAX_TEXT_LEN, IMAGE_SIZE
 
+import cv2
 
 class InstructionalHalfCheetah(gym.Env):
     """
