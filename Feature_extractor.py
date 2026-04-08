@@ -15,6 +15,9 @@ import torch.nn as nn
 
 from stable_baselines3.common.torch_layers import BaseFeaturesExtractor
 
+from Mujoco_wrapper import observation_space, space
+from Text_tokenizer import VOCAB
+
 
 class ImageTextExtractor(BaseFeaturesExtractor):
     def __init__(self, observation_space: spaces.Dict, features_dim: int = 256, vocab_size: int = len(VOCAB)):
