@@ -61,7 +61,7 @@ VLA\
 &emsp;&emsp;├── steps   # how our model will learn in each iteration.\
 &emsp;&emsp;&emsp;&emsp;└── reward fuction.  # ingeste simple text instruction to choose desire reward.
 
-├── Feature extractor.py                # use class ImageTextExtractor to extracte features.
+├── Feature extractor.py                # use class ImageTextExtractor to extracte features.\
 &emsp;&emsp;├── CNN  # Send render image trough CNN layer to get 32*batch_size features map. 
 
 &emsp;&emsp;├── text_emb  # project text onto 32 *batch_size features map.
