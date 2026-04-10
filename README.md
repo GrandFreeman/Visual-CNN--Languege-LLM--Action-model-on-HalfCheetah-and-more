@@ -38,29 +38,40 @@ Note that due to the excessive time of the simulation, we utilized Google drive 
 ## Contents of code
 
 VLA\
-├── doc_load_embbed.py      # documents loading func. + embbeding func.\
-&emsp;&emsp;└── document_loader     # PDF / CSV / TXT / json loader
+├── Google_drive.py      # Assignig files location on drive.
 
-├── qabot.py                # Gradio entry point \
-&emsp;&emsp;├── llm \
-&emsp;&emsp;&emsp;&emsp;├── watsonx_llm()    # get_llm() \
-&emsp;&emsp;&emsp;&emsp;├── model_id      			# model_id \
-&emsp;&emsp;&emsp;&emsp;└── project_id       # project_id \
+├── Env_setup.py                # python method of environment setup. 
 
-&emsp;&emsp;├── retrievers\
-&emsp;&emsp;&emsp;&emsp;├── parent_retriever  # ParentDocumentRetriever \
-&emsp;&emsp;&emsp;&emsp;├── embedding									# watsonx_embedding() \
-&emsp;&emsp;&emsp;&emsp;├── vectorstore 						# Chroma()\
-&emsp;&emsp;&emsp;&emsp;└── document_loader\
+├── Text_tokenizer.py            # demo method to text embeding. \
+&emsp;&emsp;└── image input size  # we take input image resolution as 36*36.
 
-&emsp;&emsp;├── qa_chains + globle chatmemory\
-&emsp;&emsp;&emsp;&emsp;├── llm\
-&emsp;&emsp;&emsp;&emsp;└── LCEL structure # prompt, chain, chat_memory\ 
+├── Mujpco_wrapper.py                # use InstructionalHalfCheetah to configure Mujoco.\
+&emsp;&emsp;├── gym.make  # gym environment setting, currently "HalfCheetahV5". 
 
-&emsp;&emsp;├── gradio\
-&emsp;&emsp;&emsp;&emsp;└── gr.Interface\
+&emsp;&emsp;├── observation_space  # set the data that will be observed in our env.\
+&emsp;&emsp;&emsp;&emsp;├── states	 \
+&emsp;&emsp;&emsp;&emsp;├── text 		\
+&emsp;&emsp;&emsp;&emsp;└── image   
 
-├── Setting up a virtual environment + requirements.txt   # Necessary libs\
+&emsp;&emsp;├── _get_obs   #  observing current env to get input.\
+&emsp;&emsp;&emsp;&emsp;├── states	# get numerical states from env. \
+&emsp;&emsp;&emsp;&emsp;├── text 		# get the text instruction\
+&emsp;&emsp;&emsp;&emsp;└── image   # get reder input as image.
+
+&emsp;&emsp;├── steps   # how our model will learn in each iteration.\
+&emsp;&emsp;&emsp;&emsp;└── reward fuction.  # ingeste simple text instruction to choose desire reward.
+
+├── Feature extractor.py                # use class ImageTextExtractor to extracte features.
+&emsp;&emsp;├── CNN  # Send render image trough CNN layer to get 32*batch_size features map. 
+
+&emsp;&emsp;├── text_emb  # project text onto 32 *batch_size features map.
+
+&emsp;&emsp;├── state_mlp   #  project states onto 32 *batch_size features map.
+
+&emsp;&emsp;└── fusion.  # fuse all three input to a 32 *3 *batch_size features map.
+
+
+├── Training and Rollout  # train our PPO model with custom max iterate steps, number of steps, number of epoch, and batch_size. \
 
 └── README.md
 
@@ -105,7 +116,7 @@ python3 Env_setup.py
 ### Start the training
 - Third, after our environment is installed, we can now excute "Train&Rollout.py" to start training and proceed several rollout prediction.
 
-The input image resolution of CNN is declared in "Text_tokenizer.py", and the max training steps and PPO cariables are with "Train&Rollout.py".
+The input image resolution of CNN is declared in "Text_tokenizer.py", and the max training steps and PPO variables, such as number of steps(ex: 2048), number of epoch(ex: 3), batch_size(ex: 128) and neural numbers of policy "pi" and state value function "vf" layers, are with "Train&Rollout.py".
 
 ```bash
 python3 Train&Rollout.py
